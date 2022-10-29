@@ -1,4 +1,8 @@
-import { ChatInputCommandInteraction, Options } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  CommandInteractionOptionResolver,
+  Options,
+} from "discord.js";
 import { destructOptions } from "../../utils/destructOptions";
 
 function randomInt(min: number, max: number) {
@@ -27,7 +31,7 @@ const metaData = {
 
 const action = async (interaction: ChatInputCommandInteraction) => {
   const { dice_size, dice_quantity } = destructOptions(
-    interaction.options,
+    interaction.options as CommandInteractionOptionResolver,
     metaData.options
   );
 
