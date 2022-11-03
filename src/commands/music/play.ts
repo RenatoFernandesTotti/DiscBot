@@ -1,4 +1,9 @@
-import { ChatInputCommandInteraction, GuildMember } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  CommandInteractionOptionResolver,
+  GuildMember,
+} from "discord.js";
+import { destructOptions } from "../../utils/destructOptions";
 import { getQueue, player } from "./constants";
 
 const metaData = {
@@ -33,7 +38,10 @@ const action = async (interaction: ChatInputCommandInteraction) => {
       ephemeral: true,
     });
 
-  const query = interaction.options.getString("query");
+  const { query } = destructOptions(
+    interaction.options as CommandInteractionOptionResolver,
+    metaData.options
+  );
 
   const queue = getQueue(interaction);
 
