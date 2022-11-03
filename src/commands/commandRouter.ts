@@ -1,8 +1,9 @@
 import { BaseInteraction } from "discord.js";
 
 import { miscActions } from "./misc";
+import { musicActions } from "./music";
 
-const actionsMap: Record<string, any> = { ...miscActions };
+const actionsMap: Record<string, any> = { ...miscActions, ...musicActions };
 
 const routeAction = async (interaction: BaseInteraction) => {
   if (!interaction.isChatInputCommand()) return;

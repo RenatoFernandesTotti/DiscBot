@@ -1,7 +1,8 @@
 import { REST, Routes } from "discord.js";
 import { miscMetadata } from "./commands/misc";
+import { musicMetaData } from "./commands/music";
 
-const commands = [...miscMetadata];
+const commands = [...miscMetadata, ...musicMetaData];
 
 const { TOKEN, CLIENT_ID } = process.env;
 const rest = new REST({ version: "10" }).setToken(TOKEN || "");
