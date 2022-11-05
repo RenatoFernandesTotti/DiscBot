@@ -42,7 +42,14 @@ const action = async (interaction: ChatInputCommandInteraction) => {
     rolledDices.push(randomInt(1, dice_size));
   }
 
-  await interaction.reply(`${rolledDices}`);
+  const sum = rolledDices.reduce((reduced, current) => {
+    return reduced + current;
+  }, 0);
+
+  const messageSum = `🎲 | You rolled a ${diceNumber}d${dice_size} and got ${sum}`;
+  const messageDiscrete = `📖 | ${sum} ==> ${rolledDices.join("+")} `;
+
+  await interaction.reply([messageSum, messageDiscrete].join("\n"));
 };
 
 export { action, metaData };
