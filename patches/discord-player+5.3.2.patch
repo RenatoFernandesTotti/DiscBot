@@ -1,0 +1,13 @@
+diff --git a/node_modules/discord-player/dist/index.d.ts b/node_modules/discord-player/dist/index.d.ts
+index b6804d9..c0e1745 100644
+--- a/node_modules/discord-player/dist/index.d.ts
++++ b/node_modules/discord-player/dist/index.d.ts
+@@ -761,7 +761,7 @@ interface PlayerOptions {
+     spotifyBridge?: boolean;
+     disableVolume?: boolean;
+     volumeSmoothness?: number;
+-    onBeforeCreateStream?: (track: Track, source: TrackSource, queue: Queue) => Promise<Readable>;
++    onBeforeCreateStream?: (track: Track, source: TrackSource, queue: Queue) => Promise<Readable | undefined>;
+ }
+ /**
+  * @typedef {object} ExtractorModelData

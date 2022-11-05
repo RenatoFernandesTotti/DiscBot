@@ -12,9 +12,8 @@ const action = async (interaction: ChatInputCommandInteraction) => {
   const queue = getQueue(interaction);
 
   if (queue.tracks.length === 0) {
-    return await interaction.followUp({
-      content: `⏭️ No song to skip!`,
-    });
+    queue.stop();
+    return;
   }
 
   queue.skip();
