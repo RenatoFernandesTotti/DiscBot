@@ -4,7 +4,11 @@ import {
   GuildMember,
 } from "discord.js";
 import { destructOptions } from "../../utils/destructOptions";
-import { getQueue, player } from "./constants";
+import {
+  getQueue,
+  isVoiceConnOk,
+  player,
+} from "./shared/constants";
 
 const metaData = {
   name: "play",
@@ -15,7 +19,6 @@ const metaData = {
       description: "Name or music URL (youtube)",
       name: "query",
       min_value: 2,
-      required: true,
     },
   ],
 };
@@ -23,20 +26,9 @@ const metaData = {
 const action = async (interaction: ChatInputCommandInteraction) => {
   if (!(interaction?.member instanceof GuildMember)) return;
 
-  if (!interaction.member.voice.channelId)
-    return await interaction.reply({
-      content: "You are not in a voice channel!",
-      ephemeral: true,
-    });
-  if (
-    interaction?.guild?.members?.me?.voice.channelId &&
-    interaction.member.voice.channelId !==
-      interaction.guild.members.me.voice.channelId
-  )
-    return await interaction.reply({
-      content: "You are not in my voice channel!",
-      ephemeral: true,
-    });
+  if (!(await isVoiceConnOk(interaction))) {
+    return;
+  }
 
   const { query } = destructOptions(
     interaction.options as CommandInteractionOptionResolver,
@@ -44,6 +36,11 @@ const action = async (interaction: ChatInputCommandInteraction) => {
   );
 
   const queue = getQueue(interaction);
+
+  if (!query && queue.playing) {
+    queue.setPaused(false);
+    return await interaction.reply({ content: "⏭️ | Resuming player" });
+  }
 
   // verify vc connection
   try {

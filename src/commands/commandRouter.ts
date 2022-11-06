@@ -11,7 +11,7 @@ const routeAction = async (interaction: BaseInteraction) => {
   try {
     await actionsMap[interaction.commandName](interaction);
   } catch (error) {
-    await interaction.reply("Something went wrong");
+    await interaction.channel?.send("Something went wrong");
   }
 };
 

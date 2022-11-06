@@ -9,7 +9,7 @@ const startBot = async () => {
   });
 
   client.on("interactionCreate", async (interaction: any) => {
-    routeAction(interaction);
+    await routeAction(interaction);
   });
 
   client.login(TOKEN);

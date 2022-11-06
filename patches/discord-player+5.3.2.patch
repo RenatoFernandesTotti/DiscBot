@@ -1,3 +1,23 @@
+diff --git a/node_modules/discord-player/dist/Structures/Queue.js b/node_modules/discord-player/dist/Structures/Queue.js
+index 3693981..3bca3fc 100644
+--- a/node_modules/discord-player/dist/Structures/Queue.js
++++ b/node_modules/discord-player/dist/Structures/Queue.js
+@@ -696,11 +696,13 @@ class Queue {
+                 track.raw.engine = await youtube_sr_1.default.search(`${track.author} ${track.title}`, { type: "video" })
+                     .then((res) => res[0].url)
+                     .catch(() => {
+-                    /* void */
+-                });
++                        /* void */
++                    });
+                 spotifyResolved = true;
++
+             }
+             const url = track.raw.source === "spotify" ? track.raw.engine : track.url;
++            track.url = url
+             if (!url)
+                 return void this.play(this.tracks.shift(), { immediate: true });
+             if (hasCustomDownloader) {
 diff --git a/node_modules/discord-player/dist/index.d.ts b/node_modules/discord-player/dist/index.d.ts
 index b6804d9..c0e1745 100644
 --- a/node_modules/discord-player/dist/index.d.ts

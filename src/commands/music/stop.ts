@@ -1,9 +1,9 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { isVoiceConnOk, getQueue } from "./shared/constants";
+import { getQueue, isVoiceConnOk } from "./shared/constants";
 
 const metaData = {
-  name: "skip",
-  description: "Skip current track",
+  name: "stop",
+  description: "Stop everything and kicks bot",
 };
 
 const action = async (interaction: ChatInputCommandInteraction) => {
@@ -15,15 +15,16 @@ const action = async (interaction: ChatInputCommandInteraction) => {
 
   const queue = getQueue(interaction);
 
-  if (queue.tracks.length === 0) {
-    queue.stop();
-    return;
+  if (!queue.playing) {
+    return await interaction.followUp({
+      content: `⏭️ Not playing anything!`,
+    });
   }
 
-  queue.skip();
+  queue.stop();
 
   return await interaction.followUp({
-    content: `⏭️ skipping...`,
+    content: "Clearing queue and quitting",
   });
 };
 

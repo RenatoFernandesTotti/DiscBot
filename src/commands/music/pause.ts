@@ -1,29 +1,19 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { isVoiceConnOk, getQueue } from "./shared/constants";
+import { getQueue } from "./shared/constants";
 
 const metaData = {
-  name: "skip",
-  description: "Skip current track",
+  name: "pause",
+  description: "pause player",
 };
 
 const action = async (interaction: ChatInputCommandInteraction) => {
-  if (!(await isVoiceConnOk(interaction))) {
-    return;
-  }
-
   await interaction.deferReply();
-
   const queue = getQueue(interaction);
 
-  if (queue.tracks.length === 0) {
-    queue.stop();
-    return;
-  }
-
-  queue.skip();
+  queue.setPaused(true)
 
   return await interaction.followUp({
-    content: `⏭️ skipping...`,
+    content: "Player stopped!",
   });
 };
 

@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { getQueue } from "./constants";
+import { getQueue, isVoiceConnOk } from "./shared/constants";
 
 const metaData = {
   name: "queue",
@@ -19,9 +19,11 @@ const action = async (interaction: ChatInputCommandInteraction) => {
 
   const tracks = queue.tracks;
 
-  const tracksFormatted = tracks.map(({ title }, index) => {
-    return `${index + 1} | ${title}`;
-  }).join('\n')
+  const tracksFormatted = tracks
+    .map(({ title }, index) => {
+      return `${index + 1} | ${title}`;
+    })
+    .join("\n");
 
   return await interaction.followUp({
     content: tracksFormatted,
