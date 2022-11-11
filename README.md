@@ -1,7 +1,9 @@
 
 # DiscBot
 <p align="center">
-  <img alt="Docker Image Version (latest by date)" src="https://img.shields.io/docker/v/renatofernandes/discord-bot?style=flat-square">
+  <img alt="Docker Image Version (latest by date)" src="https://img.shields.io/docker/v/renatofernandes/discord-bot?label=docker%20version&style=flat-square">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/RenatoFernandesTotti/DiscBot?style=flat-square">
+  <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/RenatoFernandesTotti/DiscBot?style=flat-square">
 </p>
 
 
